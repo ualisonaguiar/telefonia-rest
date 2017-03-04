@@ -36,11 +36,11 @@ class Usuario
      * @return array
      * @throws \Exception
      */
-    public function getListagem()
+    public function getListagem($intIdUsuario = null)
     {
         $this->validarToken();
         $usuarioDAO = new UsuarioDAO();
-        return $usuarioDAO->getListagem();
+        return $usuarioDAO->getListagem($intIdUsuario);
     }
 
     /**
@@ -52,13 +52,36 @@ class Usuario
     public function salvar($arrDataUsuario)
     {
         $usuarioDAO = new UsuarioDAO();
+        $arrDataUsuario['ds_senha'] = md5($arrDataUsuario['ds_senha']);
+        $arrInfoHasUser = $this->hasUsuarioSistema($arrDataUsuario['ds_login'], $arrDataUsuario['ds_sistema']);
+        $strMessage = 'O login informado já encontra-se atribuído ao um sistema';
         if (array_key_exists('id_usuario', $arrDataUsuario)) {
-
+            if (!empty($arrInfoHasUser) && $arrInfoHasUser['id_usuario'] != $arrDataUsuario['id_usuario']) {
+                throw new \Exception($strMessage);
+            }
+            $usuarioDAO->alterar($arrDataUsuario);
         } else {
-            $this->hasUsuarioSistema($arrDataUsuario['ds_login'], $arrDataUsuario['ds_sistema']);
-            $arrDataUsuario['ds_senha'] = md5($arrDataUsuario['ds_senha']);
+            if ($arrInfoHasUser) {
+                throw new \Exception($strMessage);
+            }
             $usuarioDAO->inserirUsuario($arrDataUsuario);
         }
+    }
+
+    /**
+     * Metodo responsavel por excluir o usuario
+     *
+     * @param $intIdUsuario
+     * @throws \Exception
+     */
+    public function excluir($intIdUsuario)
+    {
+        $arrInfoUsuario = $this->getListagem($intIdUsuario);
+        if (!$arrInfoUsuario) {
+            throw new \Exception('Usuário não encontrado no sistema.');
+        }
+        $usuarioDAO = new UsuarioDAO();
+        $usuarioDAO->excluir($intIdUsuario);
     }
 
     /**
@@ -72,8 +95,6 @@ class Usuario
     {
         $usuarioDAO = new UsuarioDAO();
         $arrInfoUsuario = $usuarioDAO->hasUsuarioSistema($strLogin, $strSistema);
-        if ($arrInfoUsuario) {
-            throw new \Exception('O login informado já encontra-se atribuído ao um sistema');
-        }
+        return ($arrInfoUsuario) ? reset($arrInfoUsuario) : false;
     }
 }

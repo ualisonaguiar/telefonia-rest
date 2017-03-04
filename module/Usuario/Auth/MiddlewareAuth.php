@@ -37,7 +37,7 @@ trait MiddlewareAuth
     {
         $arrDataToken = [
             'usuario' => $arrData,
-            'exp' => (round(microtime(true) * 1000)) + (1000 * 60 * 10)
+            'exp' => (round(microtime(true) * 1000)) + (1000 * 60 * 30)
         ];
         return JWT::encode(base64_encode(serialize($arrDataToken)), $this->strSecret);
     }

@@ -6,16 +6,22 @@ return [
             'action' => 'login'
         ]
     ],
-    'usuario-listagem' => [
+    'usuario' => [
         'GET' => [
             'controller' => '\Usuario\Controller\UsuarioController',
             'action' => 'index'
-        ]
-    ],
-    'usuario-adicionar' => [
+        ],
         'POST' => [
             'controller' => '\Usuario\Controller\UsuarioController',
             'action' => 'adicionar'
+        ],
+        'PUT' => [
+            'controller' => '\Usuario\Controller\UsuarioController',
+            'action' => 'alterar'
+        ],
+        'DELETE' => [
+            'controller' => '\Usuario\Controller\UsuarioController',
+            'action' => 'excluir'
         ]
-    ],
+    ]
 ];

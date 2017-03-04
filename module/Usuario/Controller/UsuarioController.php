@@ -9,9 +9,15 @@ class UsuarioController
 {
     use MiddlewareAuth;
 
+    protected $arrDataUser;
+
+    public function __construct()
+    {
+        $this->arrDataUser = $this->validarToken();
+    }
+
     public function index()
     {
-        $this->validarToken();
         $usuario = new UsuarioService();
         $arrResult = $usuario->getListagem();
         return ['data' => $arrResult];
@@ -19,11 +25,32 @@ class UsuarioController
 
     public function adicionar()
     {
-        $arrDataUserLogado = $this->validarToken();
-        $arrUser = json_decode(file_get_contents('php://input'), true);
-        $arrUser['idUsuarioLogado'] = $arrDataUserLogado['id_usuario'];
+        $arrUser = $this->getDataPost();
+        $arrUser['id_usuario_cadastrado'] = $this->arrDataUser['id_usuario'];
         $usuario = new UsuarioService();
         $usuario->salvar($arrUser);
         return ['message' => 'Usuário cadastrado com sucesso.'];
+    }
+
+    public function alterar()
+    {
+        $arrUser = $this->getDataPost();
+        $arrUser['id_usuario_cadastrado'] = $this->arrDataUser['id_usuario'];
+        $usuario = new UsuarioService();
+        $usuario->salvar($arrUser);
+        return ['message' => 'Usuário alterado com sucesso.'];
+    }
+
+    public function excluir()
+    {
+        $arrUser = $this->getDataPost();
+        $usuario = new UsuarioService();
+        $usuario->excluir($arrUser['id_usuario']);
+        return ['message' => 'Usuário excluído com sucesso.'];
+    }
+
+    protected function getDataPost()
+    {
+        return json_decode(file_get_contents('php://input'), true);
     }
 }
