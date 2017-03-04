@@ -20,7 +20,7 @@ try {
     printResult(0, $mixResult, 200);
 } catch (\Exception $exception) {
     printResult(
-        $exception->getCode(),
+        500,
         ['message' => $exception->getMessage()],
         false
     );
