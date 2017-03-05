@@ -23,5 +23,17 @@ return [
             'controller' => '\Usuario\Controller\UsuarioController',
             'action' => 'excluir'
         ]
+    ],
+    'telefone' => [
+        'POST' => [
+            'controller' => '\Usuario\Controller\TelefoneController',
+            'action' => 'adicionar'
+        ]
+    ],
+    'telefone-lote' => [
+        'POST' => [
+            'controller' => '\Usuario\Controller\TelefoneController',
+            'action' => 'adicionarEmLote'
+        ]
     ]
 ];

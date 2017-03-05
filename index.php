@@ -10,11 +10,11 @@ try {
         throw new \Exception('A rota: ' . $strRoute . ' não existe', 500);
     }
     $arrInfoRoute = $arrRoutes[$strRoute];
-    if (!array_key_exists($strMethod, $arrInfoRoute)) {
-        //throw new \Exception('O método HTTP: ' . $strMethod . ' não existe para a rota: ' . $strRoute, 500);
+    if (!array_key_exists($strMethod, $arrInfoRoute) && $strMethod != 'OPTIONS') {
+        throw new \Exception('O método HTTP: ' . $strMethod . ' não existe para a rota: ' . $strRoute, 500);
     }
     require_once 'vendor/autoload.php';
-    if ($arrInfoRoute && $strMethod != 'OPTIONS') {
+    if ($arrInfoRoute) {
         $strController = $arrInfoRoute[$strMethod]['controller'];
         $strAction = $arrInfoRoute[$strMethod]['action'];
         $mixResult = (new $strController())->$strAction();

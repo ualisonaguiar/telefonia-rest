@@ -4,10 +4,12 @@ namespace Usuario\Controller;
 
 use Usuario\Service\Usuario as UsuarioService;
 use Usuario\Auth\MiddlewareAuth;
+use Usuario\Controller\UtilController;
 
 class UsuarioController
 {
-    use MiddlewareAuth;
+    use MiddlewareAuth,
+        UtilController;
 
     protected $arrDataUser;
 
@@ -47,10 +49,5 @@ class UsuarioController
         $usuario = new UsuarioService();
         $usuario->excluir($arrUser['id_usuario']);
         return ['message' => 'Usuário excluído com sucesso.'];
-    }
-
-    protected function getDataPost()
-    {
-        return json_decode(file_get_contents('php://input'), true);
     }
 }

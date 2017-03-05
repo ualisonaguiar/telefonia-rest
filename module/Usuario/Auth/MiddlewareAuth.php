@@ -21,6 +21,9 @@ trait MiddlewareAuth
             throw new \Exception('Token não localizado');
         }
         $strToken = trim(str_replace('Bearer', '', $arrHeader['Authorization']));
+        if (!$strToken) {
+            throw new \Exception('Token não localizado');
+        }
         $token = JWT::decode($strToken, $this->strSecret, ['HS256']);
         $arrDataToken = unserialize(base64_decode($token));
         $this->validarTempToken($arrDataToken['exp']);

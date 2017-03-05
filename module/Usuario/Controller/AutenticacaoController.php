@@ -9,14 +9,15 @@
 namespace Usuario\Controller;
 
 use Usuario\Service\Usuario as UsuarioService;
+use Usuario\Controller\UtilController;
 
 class AutenticacaoController
 {
+    use UtilController;
+
     public function login()
     {
-        $dataLogin = json_decode(file_get_contents('php://input'), true);
-        var_dump($dataLogin);
-        die;
+        $dataLogin = $this->getDataPost();
         $usuarioService = new UsuarioService();
         $strToken = $usuarioService->getLogin(
             $dataLogin['usuario'],
