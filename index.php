@@ -11,13 +11,15 @@ try {
     }
     $arrInfoRoute = $arrRoutes[$strRoute];
     if (!array_key_exists($strMethod, $arrInfoRoute)) {
-        throw new \Exception('O método HTTP: ' . $strMethod . ' não existe para a rota: ' . $strRoute, 500);
+        //throw new \Exception('O método HTTP: ' . $strMethod . ' não existe para a rota: ' . $strRoute, 500);
     }
     require_once 'vendor/autoload.php';
-    $strController = $arrInfoRoute[$strMethod]['controller'];
-    $strAction = $arrInfoRoute[$strMethod]['action'];
-    $mixResult = (new $strController())->$strAction();
-    printResult(0, $mixResult, 200);
+    if ($arrInfoRoute && $strMethod != 'OPTIONS') {
+        $strController = $arrInfoRoute[$strMethod]['controller'];
+        $strAction = $arrInfoRoute[$strMethod]['action'];
+        $mixResult = (new $strController())->$strAction();
+        printResult(0, $mixResult, 200);
+    }
 } catch (\Exception $exception) {
     printResult(
         500,
