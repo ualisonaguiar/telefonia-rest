@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - poc_usuario@localhost" uuid="e376bf2a-cd8c-47ec-aa9a-866049c92663">
+    <database-info product="MySQL" version="5.7.17-0ubuntu0.16.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <schema name="" catalog="poc_usuario"/>
+    <table name="tb_telefone" schema="" catalog="poc_usuario" type="TABLE">
+      <column name="id_telefone" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="id_usuario" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ds_prefixo" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ds_senha" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="co_categoria" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ds_chave" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id_telefone"/>
+      <foreign-key name="fk_tb_telefone_usuario" columns="id_usuario" ref-table="tb_usuario" ref-schema="" ref-catalog="poc_usuario" ref-columns="id_usuario" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_tb_telefone_usuario_idx" unique="false" columns="id_usuario"/>
+    </table>
+    <table name="tb_usuario" schema="" catalog="poc_usuario" type="TABLE">
+      <column name="id_usuario" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="ds_login" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ds_senha" sqlType="VARCHAR" precision="52" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ds_sistema" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="id_usuario_cadastrado" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id_usuario"/>
+      <foreign-key name="fk_tb_usuario_usuario_cadastrado" columns="id_usuario_cadastrado" ref-table="tb_usuario" ref-schema="" ref-catalog="poc_usuario" ref-columns="id_usuario" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_tb_telefone_usuario" table="tb_telefone" schema="" catalog="poc_usuario" columns="id_usuario"/>
+      <exported-key name="fk_tb_usuario_usuario_cadastrado" table="tb_usuario" schema="" catalog="poc_usuario" columns="id_usuario_cadastrado"/>
+      <index name="fk_tb_usuario_usuario_cadastrado_idx" unique="false" columns="id_usuario_cadastrado"/>
+    </table>
+  </data-source>
+  <data-source name="SQLite -" uuid="1a31a880-ae3a-4ee6-809a-8c598a08070b">
+    <database-info product="SQLite" version="3.8.11" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native"/>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed"/>
+    <schema name="" catalog=""/>
+    <table name="sqlite_sequence" schema="" catalog="" type="TABLE">
+      <column name="name" sqlType="" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="seq" sqlType="" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+    </table>
+    <table name="tb_cliente" schema="" catalog="" type="TABLE">
+      <column name="id_cliente" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="ds_nome" sqlType="VARCHAR (255)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="ds_login" sqlType="VARCHAR (150)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="ds_password" sqlType="VARCHAR (200)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="in_ativo" sqlType="BOOLEAN" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <primary-key columns="id_cliente"/>
+      <exported-key name="#FAKE_tb_sms_1" table="tb_sms" schema="" catalog="" columns="id_cliente"/>
+    </table>
+    <table name="tb_log" schema="" catalog="" type="TABLE">
+      <column name="id_log" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="id_sms" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="ds_log" sqlType="VARCHAR (1000)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="dat_log" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="tp_tipo_log" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id_log"/>
+      <foreign-key name="#FAKE_tb_log_1" columns="id_sms" ref-table="tb_sms" ref-schema="" ref-catalog="" ref-columns="id_sms" update-rule="3" delete-rule="3" deferrability="1"/>
+    </table>
+    <table name="tb_operadora" schema="" catalog="" type="TABLE">
+      <column name="id_operadora" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="no_operadora" sqlType="VARCHAR (200)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <primary-key columns="id_operadora"/>
+      <exported-key name="#FAKE_tb_sms_2" table="tb_sms" schema="" catalog="" columns="id_operadora"/>
+    </table>
+    <table name="tb_pin" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="prefixo" sqlType="VARCHAR (100)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="chave" sqlType="VARCHAR (50)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="senha" sqlType="VARCHAR (50)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="codigo" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+    </table>
+    <table name="tb_sms" schema="" catalog="" type="TABLE">
+      <column name="id_sms" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="id_operadora" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="id_cliente" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="nu_ddd" sqlType="NUMERIC (2, 2)" precision="2000000000" scale="10" nullable="false" jdbcType="6"/>
+      <column name="nu_telefone" sqlType="NUMERIC (9, 0)" precision="2000000000" scale="10" nullable="false" jdbcType="6"/>
+      <column name="ds_mensagem" sqlType="VARCHAR (200)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="dat_cadastro" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="tp_situacao_envio" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <primary-key columns="id_sms"/>
+      <foreign-key name="#FAKE_tb_sms_1" columns="id_cliente" ref-table="tb_cliente" ref-schema="" ref-catalog="" ref-columns="id_cliente" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_tb_sms_2" columns="id_operadora" ref-table="tb_operadora" ref-schema="" ref-catalog="" ref-columns="id_operadora" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="#FAKE_tb_log_1" table="tb_log" schema="" catalog="" columns="id_sms"/>
+    </table>
+    <table name="tb_usuario" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="login" sqlType="VARCHAR (100)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="senha" sqlType="VARCHAR (50)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <primary-key columns="id"/>
+    </table>
+  </data-source>
+</component>
