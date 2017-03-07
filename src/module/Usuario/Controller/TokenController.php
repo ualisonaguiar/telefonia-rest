@@ -16,7 +16,7 @@ class TokenController
             $strToken = $usuarioService->efetuarLogin($arrPost['login'], $arrPost['senha']);
             return $response->withJson(['token' => $strToken, 'status' => true], 200);
         } catch(\Exception $exception) {
-            return $response->withStatus(500, $exception->getMessage());
+            return $response->withJson(['message' => $exception->getMessage(), 'status' => false], 500);
         }
     }
 }

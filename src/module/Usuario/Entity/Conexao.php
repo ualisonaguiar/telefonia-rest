@@ -15,24 +15,10 @@ trait Conexao
     public function getConection()
     {
         if (!self::$conection) {
-            $pdoConnection = $this->getConnectionSqlite();
+            self::$conection = new \PDO("pgsql:dbname=poc_sms;host=localhost", 'postgres', 'abcd1234');
             //$pdoConnection = $this->getConnectionPgSQL();
-            $pdoConnection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-            self::$conection = $pdoConnection;
+            self::$conection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         }
         return self::$conection;
-    }
-
-    private function getConnectionPgSQL()
-    {
-        $pdoConnection = new \PDO("pgsql:dbname=poc_sms;host=localhost", 'postgres', '123456');
-        return $pdoConnection;
-    }
-
-    private function getConnectionSqlite()
-    {
-        $strPath = dirname(__FILE__) . '/../../../../database/poc_sms.db';
-        $pdoConnection = new \PDO('sqlite:' . $strPath);
-        return $pdoConnection;
     }
 }
