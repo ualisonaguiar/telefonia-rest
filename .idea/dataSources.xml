@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="2855418574">
+  <component name="DataSourceManagerImpl" format="xml" hash="712680820">
     <data-source source="LOCAL" name="MySQL - poc_usuario@localhost" uuid="e376bf2a-cd8c-47ec-aa9a-866049c92663">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
@@ -20,6 +20,13 @@
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/database/poc_sms.db</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="PostgreSQL - poc_usuario@localhost" uuid="f97356f2-ef51-4f21-b48f-9239591bcd21">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/poc_usuario</jdbc-url>
       <libraries />
     </data-source>
   </component>

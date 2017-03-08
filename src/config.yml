@@ -1,0 +1,7 @@
+config:
+    db:
+        type: pgsql
+        dbname: poc_usuario
+        host: localhost
+        user: postgres
+        password: abcd1234

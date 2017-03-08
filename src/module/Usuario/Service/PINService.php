@@ -25,9 +25,16 @@ class PINService
     public function adicionarLote($arrData)
     {
         try {
+            $inicio1 = microtime(true);
             $pinEntity = new PinEntity();
-            $arrData = array_map("unserialize", array_unique(array_map("serialize", $arrData['pin'])));
-
+            $arrData = array_map(
+                "unserialize",
+                array_unique(array_map("serialize", $arrData['pin']))
+            );
+            $pinEntity->adicionarLote($arrData);
+            $total1 = microtime(true) - $inicio1;
+            echo 'Tempo de execução do primeiro script: ' . $total1;
+            die;
         } catch(\Exception $exception) {
             throw new \Exception($exception->getMessage());
         }

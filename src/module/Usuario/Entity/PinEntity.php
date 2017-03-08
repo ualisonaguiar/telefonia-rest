@@ -33,10 +33,13 @@ class PinEntity
         try {
             $connection = self::getConection();
             $connection->beginTransaction();
-            $this->adicionar($arrData);
+            foreach ($arrData as $arrInfo) {
+                $this->adicionar($arrInfo);                
+            }
             $connection->commit();
         } catch(\Exception $exception) {
             $connection->rollBack();
+            throw new \Exception($exception->getMessage());
         }
     }
 }

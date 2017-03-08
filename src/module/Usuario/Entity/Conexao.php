@@ -1,12 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ualison
- * Date: 17/08/16
- * Time: 23:40
- */
 
 namespace Usuario\Entity;
+
+use Symfony\Component\Yaml\Yaml;
 
 trait Conexao
 {
@@ -15,7 +11,12 @@ trait Conexao
     public function getConection()
     {
         if (!self::$conection) {
-            self::$conection = new \PDO("pgsql:dbname=poc_sms;host=localhost", 'postgres', 'abcd1234');
+            $arrParameters = Yaml::parse(file_get_contents(realpath(__DIR__) . '/../../../config.yml'))['config']['db'];
+            self::$conection = new \PDO(
+                $arrParameters['type'] . ':dbname=' . $arrParameters['dbname'] . ';host=' . $arrParameters['host'],
+                $arrParameters['user'],
+                $arrParameters['password']
+            );
             //$pdoConnection = $this->getConnectionPgSQL();
             self::$conection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         }

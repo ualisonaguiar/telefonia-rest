@@ -13,6 +13,7 @@ class ComposerStaticInitdb017b6b3825ee6e070d47d8c7409736
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
+            'Symfony\\Component\\Yaml\\' => 23,
             'Slim\\' => 5,
         ),
         'P' => 
@@ -32,6 +33,10 @@ class ComposerStaticInitdb017b6b3825ee6e070d47d8c7409736
     );
 
     public static $prefixDirsPsr4 = array (
+        'Symfony\\Component\\Yaml\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/yaml',
+        ),
         'Slim\\' => 
         array (
             0 => __DIR__ . '/..' . '/slim/slim/Slim',
