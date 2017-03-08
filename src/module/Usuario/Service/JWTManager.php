@@ -18,9 +18,9 @@ class JWTManager
     {
         $arrDataToken = [
             'iat' => time(),
-            'exp' => (round(microtime(true) * 1000)) + (1000 * 60 * 30),
+            'exp' => (round(microtime(true) * 1000)) + (1000 * 60 * $arrData[0]['timeout']),
             'context' => [
-                'user' => $arrData
+                'user' => $arrData[0]
             ],
         ];
         return JWT::encode(base64_encode(serialize($arrDataToken)), $this->secret);

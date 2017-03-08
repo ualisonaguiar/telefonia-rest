@@ -12,11 +12,20 @@ use Usuario\Entity\PinEntity;
 
 class PINService
 {
-    public function adicionar($arrData)
+    public function salvar($arrData)
     {
         try {
             $pinEntity = new PinEntity();
-            return $pinEntity->adicionar($arrData);
+            $arrResult = $this->getAllPinToken($arrData['prefixo']);
+            $strMethod = 'adicionar';
+            $strReturn = 'adicionado';
+            if ($arrResult) {
+                $strMethod = 'atualizar';
+                $arrData['id'] = $arrResult[$arrData['prefixo']]['id'];
+                $strReturn = 'atualizado';
+            }
+            $pinEntity->$strMethod($arrData);
+            return $strReturn;
         } catch(\Exception $exception) {
             throw new \Exception($exception->getMessage());
         }
@@ -25,18 +34,44 @@ class PINService
     public function adicionarLote($arrData)
     {
         try {
-            $inicio1 = microtime(true);
             $pinEntity = new PinEntity();
             $arrData = array_map(
                 "unserialize",
                 array_unique(array_map("serialize", $arrData['pin']))
             );
-            $pinEntity->adicionarLote($arrData);
-            $total1 = microtime(true) - $inicio1;
-            echo 'Tempo de execução do primeiro script: ' . $total1;
-            die;
+            if ($arrData) {
+                $arrAllPinToken = $this->preparFetchPairsPrefixo($pinEntity->getListagem());
+                foreach ($arrData as $intPosicao => $arrInfoData) {
+                    if (array_key_exists($arrInfoData['prefixo'], $arrAllPinToken)) {
+                        $arrInfoData['id'] = $arrAllPinToken[$arrInfoData['prefixo']]['id'];
+                        $pinEntity->atualizar($arrInfoData);
+                        unset($arrData[$intPosicao]);
+                    }
+                }
+                $pinEntity->adicionarLote($arrData);
+            }
         } catch(\Exception $exception) {
             throw new \Exception($exception->getMessage());
         }
+    }
+
+    protected function getAllPinToken($intPrefixo)
+    {
+        $pinEntity = new PinEntity();
+        $arrResult = $pinEntity->getListagem([
+            'prefixo' => $intPrefixo
+        ]);
+        if (!$arrResult) {
+            return $arrResult;
+        }
+        return $this->preparFetchPairsPrefixo($arrResult);
+    }
+
+    protected function preparFetchPairsPrefixo($arrResultPin) {
+        $arrFetchPairPrefixo = [];
+        foreach ($arrResultPin as $arrInfo) {
+            $arrFetchPairPrefixo[$arrInfo['prefixo']] = $arrInfo;
+        }
+        return $arrFetchPairPrefixo;
     }
 }

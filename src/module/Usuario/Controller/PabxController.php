@@ -8,25 +8,25 @@ use Usuario\Service\PINService;
 
 class PabxController
 {
-    public function adicionar(RequestSlim $request, ResponseSlim $response, $args = null)
+    public function salvar(RequestSlim $request, ResponseSlim $response, $args = null)
     {
         try {
             $arrDataPost = $request->getParams();
             $pinService = new PINService();
-            $pinService->adicionar($arrDataPost);
+            $strReturn = $pinService->salvar($arrDataPost);
             $response->write(json_encode([
                 'status' => true,
-                'message' => 'Registro inserido com sucesso'
+                'message' => 'Registro ' . $strReturn . ' com sucesso'
             ]))
                 ->withAddedHeader('Content-Type', 'application/json');
-        } catch(\Exception $exception) {
+        } catch (\Exception $exception) {
             $response = $response->withStatus(500, $exception->getMessage());
         }
         $response = $response->withAddedHeader('Content-Type', 'application/json');
         return $response;
     }
 
-    public function adicionarLote(RequestSlim $request, ResponseSlim $response, $args = null)
+    public function salvarLote(RequestSlim $request, ResponseSlim $response, $args = null)
     {
         try {
             $arrDataPost = $request->getParams();
@@ -34,10 +34,10 @@ class PabxController
             $pinService->adicionarLote($arrDataPost);
             $response->write(json_encode([
                 'status' => true,
-                'message' => 'Registro inserido com sucesso'
+                'message' => 'Registro persistido com sucesso'
             ]))
                 ->withAddedHeader('Content-Type', 'application/json');
-        } catch(\Exception $exception) {
+        } catch (\Exception $exception) {
             $response = $response->withStatus(500, $exception->getMessage());
         }
         $response = $response->withAddedHeader('Content-Type', 'application/json');
