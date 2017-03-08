@@ -31,7 +31,7 @@ class PINService
         }
     }
 
-    public function adicionarLote($arrData)
+    public function salvarLote($arrData)
     {
         try {
             $pinEntity = new PinEntity();
@@ -50,6 +50,7 @@ class PINService
                 }
                 $pinEntity->adicionarLote($arrData);
             }
+            return true;
         } catch(\Exception $exception) {
             throw new \Exception($exception->getMessage());
         }

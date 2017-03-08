@@ -31,7 +31,7 @@ class PabxController
         try {
             $arrDataPost = $request->getParams();
             $pinService = new PINService();
-            $pinService->adicionarLote($arrDataPost);
+            $pinService->salvarLote($arrDataPost);
             $response->write(json_encode([
                 'status' => true,
                 'message' => 'Registro persistido com sucesso'
