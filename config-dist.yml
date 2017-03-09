@@ -1,7 +1,0 @@
-config:
-    db:
-        type: pgsql
-        dbname: poc_sms
-        host: localhost
-        user: postgres
-        password: 123456
