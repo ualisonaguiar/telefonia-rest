@@ -64,9 +64,9 @@ class ComposerStaticInitdb017b6b3825ee6e070d47d8c7409736
     );
 
     public static $prefixesPsr0 = array (
-        'U' => 
+        'T' => 
         array (
-            'Usuario\\' => 
+            'Telefonia\\' => 
             array (
                 0 => __DIR__ . '/../..' . '/src/module',
             ),

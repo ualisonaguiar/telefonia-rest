@@ -9,14 +9,6 @@ if (PHP_SAPI == 'cli-server') {
     }
 }
 
-//Debug
-function x($arg)
-{
-    echo "<pre>";
-    print_r($arg);
-    echo "</pre>";
-}
-
 date_default_timezone_set('America/Sao_paulo');
 
 require __DIR__ . '/../vendor/autoload.php';

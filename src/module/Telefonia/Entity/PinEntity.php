@@ -6,9 +6,9 @@
  * Time: 11:52
  */
 
-namespace Usuario\Entity;
+namespace Telefonia\Entity;
 
-use Usuario\Entity\Conexao;
+use Telefonia\Entity\Conexao;
 
 class PinEntity
 {

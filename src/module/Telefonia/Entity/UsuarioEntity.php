@@ -1,8 +1,8 @@
 <?php
 
-namespace Usuario\Entity;
+namespace Telefonia\Entity;
 
-use Usuario\Entity\Conexao;
+use Telefonia\Entity\Conexao;
 
 class UsuarioEntity
 {

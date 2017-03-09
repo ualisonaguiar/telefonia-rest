@@ -6,9 +6,9 @@
  * Time: 11:09
  */
 
-namespace Usuario\Service;
+namespace Telefonia\Service;
 
-use Usuario\Entity\PinEntity;
+use Telefonia\Entity\PinEntity;
 
 class PINService
 {

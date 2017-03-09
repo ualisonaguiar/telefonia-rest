@@ -1,6 +1,6 @@
 <?php
 
-namespace Usuario\Entity;
+namespace Telefonia\Entity;
 
 use Symfony\Component\Yaml\Yaml;
 

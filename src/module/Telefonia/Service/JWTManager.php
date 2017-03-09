@@ -6,7 +6,7 @@
  * Time: 11:37
  */
 
-namespace Usuario\Service;
+namespace Telefonia\Service;
 
 use Firebase\JWT\JWT;
 

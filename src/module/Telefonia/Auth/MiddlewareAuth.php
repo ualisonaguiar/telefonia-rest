@@ -1,11 +1,10 @@
 <?php
 
-namespace Usuario\Auth;
+namespace Telefonia\Auth;
 
 use Slim\Http\Request as RequestSlim;
 use Slim\Http\Response as ResponseSlim;
-use Firebase\JWT\JWT;
-use Usuario\Service\JWTManager;
+use Telefonia\Service\JWTManager;
 
 class MiddlewareAuth
 {

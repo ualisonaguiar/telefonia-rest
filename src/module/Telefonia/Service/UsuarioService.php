@@ -1,9 +1,9 @@
 <?php
 
-namespace Usuario\Service;
+namespace Telefonia\Service;
 
-use Usuario\Entity\UsuarioEntity;
-use Usuario\Service\JWTManager;
+use Telefonia\Entity\UsuarioEntity;
+use Telefonia\Service\JWTManager;
 
 class UsuarioService
 {

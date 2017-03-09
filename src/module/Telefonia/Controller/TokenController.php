@@ -1,10 +1,10 @@
 <?php
 
-namespace Usuario\Controller;
+namespace Telefonia\Controller;
 
 use Slim\Http\Request as RequestSlim;
 use Slim\Http\Response as ResponseSlim;
-use Usuario\Service\UsuarioService;
+use Telefonia\Service\UsuarioService;
 
 class TokenController
 {
