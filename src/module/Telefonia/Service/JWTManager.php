@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ualison
- * Date: 06/03/17
- * Time: 11:37
- */
 
 namespace Telefonia\Service;
 
@@ -34,3 +28,5 @@ class JWTManager
         return $arrDataToken;
     }
 }
+
+?>

@@ -35,6 +35,7 @@ class PabxController
             $response->write(json_encode([
                 'status' => true,
                 'message' => 'Registro persistido com sucesso'
+            		
             ]))
                 ->withAddedHeader('Content-Type', 'application/json');
         } catch (\Exception $exception) {
@@ -44,3 +45,5 @@ class PabxController
         return $response;
     }
 }
+
+?>

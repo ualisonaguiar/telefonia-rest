@@ -13,7 +13,7 @@ class UsuarioService
             $usuarioEntity = new UsuarioEntity();
             $arrResult = $usuarioEntity->efetuarLogin($strLogin, md5($strSenha));
             if (!$arrResult) {
-                throw new \Exception('Usuário/Senha informado incorreto.');
+                throw new \Exception('Credenciais invalidas.');
             }
             $jwtManager = new JWTManager();
             return $jwtManager->gerarToken($arrResult);
@@ -22,3 +22,5 @@ class UsuarioService
         }
     }
 }
+
+?>

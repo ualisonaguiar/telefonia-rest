@@ -10,7 +10,7 @@ class UsuarioEntity
 
     public function efetuarLogin($strLogin, $strSenha)
     {
-        $strQuery = 'select * from tb_usuario where login = :ds_login and senha = :ds_password';
+        $strQuery = 'select * from poc_sms.tb_usuario where login = :ds_login and senha = :ds_password';
         $connection = self::getConection();
         $query = $connection->prepare($strQuery);
         $query->execute([
@@ -20,3 +20,5 @@ class UsuarioEntity
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
 }
+
+?>

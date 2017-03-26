@@ -11,7 +11,7 @@ trait Conexao
     public function getConection()
     {
         if (!self::$conection) {
-            $strFile = realpath(__DIR__) . '/../../../../config.yml';
+            $strFile = realpath(__DIR__) . '/../../../../ConfigSGT.yml';
             $arrParameters = Yaml::parse(file_get_contents($strFile))['config']['db'];
             self::$conection = new \PDO(
                 $arrParameters['type'] . ':dbname=' . $arrParameters['dbname'] . ';host=' . $arrParameters['host'],
@@ -23,3 +23,5 @@ trait Conexao
         return self::$conection;
     }
 }
+
+?>
